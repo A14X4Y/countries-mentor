@@ -10,7 +10,7 @@ const InputContainer = styled.label`
   border-radius: var(--radii);
   box-shadow: var(--shadow);
   width: 100%;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
   @media (min-width: 767px) {
     margin-bottom: 0;
     width: 280px;

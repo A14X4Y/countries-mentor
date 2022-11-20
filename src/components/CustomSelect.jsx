@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import Select from "react-select";
 
-import React from "react";
-
 export const CustomSelect = styled(Select).attrs({
   styles: {
     control: (provided) => ({
@@ -19,10 +17,23 @@ export const CustomSelect = styled(Select).attrs({
     option: (provided, state) => ({
       ...provided,
       cursor: "pointer",
-      color: state.isSelected ? "var(--colors-bg)" : "var(--colors-text)",
+      color: "var(--colors-text)",
       backgroundColor: state.isSelected
-        ? "var(--colors-bg)"
-        : "var(--colors-ui-base)",
+        ? "var(--colors-ui-base)"
+        : "var(--colors-bg)",
     }),
   },
-})``;
+})`
+  width: 200px;
+  border-radius: var(--radii);
+  border: none;
+
+  & > * {
+    box-shadow: var(--shadow);
+  }
+
+  & * {
+    color: var(--colors-text) !important;
+    background-color: var(--colors-ui-base);
+  }
+`;
