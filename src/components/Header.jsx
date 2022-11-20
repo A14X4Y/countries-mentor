@@ -21,12 +21,21 @@ const Title = styled.a.attrs({
   href: "/",
 })`
   color: var(--colors-text);
-  font-size: car(----fs-sm);
+  font-size: car(--fs-sm);
   text-decoration: none;
   font-weight: var(--fw-bold);
 `;
 
-const ModeSwitcher = styled.div``;
+const ModeSwitcher = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 0.7rem;
+  color: var(--colors-text);
+  font-size: car(--fs-sm);
+  cursor: pointer;
+  font-weight: var(--fw-bold);
+  text-transform: capitalize;
+`;
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
@@ -38,7 +47,12 @@ const Header = () => {
           <Wrapper>
             <Title>Where is the world?</Title>
             <ModeSwitcher onClick={toggleTheme}>
-              <BsMoonStars /> LightTheme
+              {theme === "dark" ? (
+                <BsMoonStarsFill size="14px" />
+              ) : (
+                <BsMoonStars size="14px" />
+              )}
+              <span>{theme} Theme</span>
             </ModeSwitcher>
           </Wrapper>
         </Container>
