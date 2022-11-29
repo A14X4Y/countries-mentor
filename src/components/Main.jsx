@@ -10,6 +10,7 @@ const Wrapper = styled.main`
 `;
 
 const Main = ({ children }) => {
+  
   return (
     <Wrapper>
       <Container>{children}</Container>
