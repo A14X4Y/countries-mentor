@@ -7,15 +7,21 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectAllCountries,
   selectCountriesInfo,
+  selectVisibleCountries,
 } from "../store/countries/countries-selector";
 import Preloader from "../components/preloader/Preloader";
 import { loadCountries } from "../store/countries/countries-actions";
+import { selectSearch } from "../store/controls/control-selector";
 
 export const Home = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const countries = useSelector(selectAllCountries);
+  const search = useSelector(selectSearch);
+
+  const countries = useSelector((state) =>
+    selectVisibleCountries(state, { search })
+  );
 
   const { status, error, qty } = useSelector(selectCountriesInfo);
 
