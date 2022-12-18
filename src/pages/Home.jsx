@@ -11,20 +11,17 @@ import {
 } from "../store/countries/countries-selector";
 import Preloader from "../components/preloader/Preloader";
 import { loadCountries } from "../store/countries/countries-actions";
-import { selectSearch } from "../store/controls/control-selector";
+import { selectControls } from "../store/controls/control-selector";
 
 export const Home = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const search = useSelector(selectSearch);
-
+  const { search, region } = useSelector(selectControls);
   const countries = useSelector((state) =>
-    selectVisibleCountries(state, { search })
+    selectVisibleCountries(state, { search, region })
   );
-
   const { status, error, qty } = useSelector(selectCountriesInfo);
-
   useEffect(() => {
     if (!qty) {
       dispatch(loadCountries());
