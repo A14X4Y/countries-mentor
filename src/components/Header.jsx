@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Container } from "./Container";
 import { setTheme } from "../store/theme/theme-actions";
 import { useEffect } from "react";
+import { clearControls } from "../store/controls/controls-action";
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -52,6 +53,8 @@ export const Header = () => {
   const toggleTheme = () =>
     dispatch(setTheme(theme === "light" ? "dark" : "light"));
 
+  const clearUp = () => dispatch(clearControls());
+
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
@@ -60,7 +63,7 @@ export const Header = () => {
     <HeaderEl>
       <Container>
         <Wrapper>
-          <Title>Where is the world?</Title>
+          <Title onClick={clearUp}>Where is the world?</Title>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === "light" ? (
               <IoMoonOutline size="14px" />
