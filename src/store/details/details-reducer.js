@@ -51,7 +51,7 @@ export const detailsReducer = (state = initialState, { type, payload }) => {
     }
 
     default: {
-      return initialState;
+      return state;
     }
   }
 };
