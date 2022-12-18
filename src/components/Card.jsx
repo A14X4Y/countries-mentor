@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Wrapper = styled.article`
   border-radius: var(--radii);
-  background-color: var(--color-ui-base);
+  background-color: car(--colors-ui-base);
   box-shadow: var(--shadow);
   cursor: pointer;
   overflow: hidden;
@@ -14,10 +14,11 @@ const CardImage = styled.img`
   height: 150px;
   object-fit: cover;
   object-position: center;
+  box-shadow: var(--shadow);
 `;
 
 const CardBody = styled.div`
-  padding: 1rem 1rem 1.5rem;
+  padding: 1rem 1.5rem 2rem;
 `;
 
 const CardTitle = styled.h3`
@@ -28,9 +29,10 @@ const CardTitle = styled.h3`
 
 const CardList = styled.ul`
   list-style: none;
-  padding: 1rem 0 0;
   margin: 0;
+  padding: 1rem 0 0;
 `;
+
 const CardListItem = styled.li`
   font-size: var(--fs-sm);
   line-height: 1.5;
@@ -41,17 +43,16 @@ const CardListItem = styled.li`
   }
 `;
 
-const Card = ({ img, name, info = [], onClick }) => {
+export const Card = ({ img, name, info = [], onClick }) => {
   return (
     <Wrapper onClick={onClick}>
-      <CardImage src={img} />
+      <CardImage src={img} alt={name} />
       <CardBody>
         <CardTitle>{name}</CardTitle>
         <CardList>
-          {info.map((item) => (
-            <CardListItem key={item.id}>
-              <b>{item.title}: </b>
-              {item.description}
+          {info.map((el) => (
+            <CardListItem key={el.title}>
+              <b>{el.title}:</b> {el.description}
             </CardListItem>
           ))}
         </CardList>
@@ -59,5 +60,3 @@ const Card = ({ img, name, info = [], onClick }) => {
     </Wrapper>
   );
 };
-
-export default Card;

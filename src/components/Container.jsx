@@ -1,10 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-const Container = styled.div`
+import styled from 'styled-components';
+
+export const Container = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 0 2rem;
 `;
-
-export default Container;

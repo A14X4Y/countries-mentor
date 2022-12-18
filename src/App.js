@@ -1,11 +1,10 @@
-import Header from "./components/Header";
-import Main from "./components/Main";
+import { Header } from "./components/Header";
+import { Main } from "./components/Main";
 
-import { ALL_COUNTRIES } from "./config";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import Details from "./pages/Details";
+import { Home } from "./pages/Home";
+import { NotFound } from "./pages/NotFound";
+import { Details } from "./pages/Details";
 function App() {
   return (
     <>

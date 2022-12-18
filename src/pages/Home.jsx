@@ -1,45 +1,48 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { ALL_COUNTRIES } from "../config";
-import Controls from "../components/Controls";
-import List from "../components/List";
-import Card from "../components/Card";
-const Home = () => {
-  const [countries, setCountries] = useState([]);
+import { useNavigate } from 'react-router-dom';
 
-  useEffect(() => {
-    axios.get(ALL_COUNTRIES).then((res) => setCountries(res.data));
-  }, []);
-  console.log(countries);
+import { List } from '../components/List';
+import { Card } from '../components/Card';
+import { Controls } from '../components/Controls';
+
+export const Home = () => {
+  const navigate = useNavigate();
+
+  const countries = [];
+
   return (
     <>
       <Controls />
+
       <List>
-        {countries.map((country) => {
-          const countryInfo = {
-            img: country.flags.png,
-            name: country.name,
-            info: [
-              {
-                title: "Population",
-                description: country.population.toLocaleString(),
-              },
-              {
-                title: "Region",
-                description: country.population,
-              },
-              {
-                title: "Capital",
-                description: country.capital,
-              },
-            ],
-          };
-          return <Card key={country.name} {...countryInfo} />;
-        })}
-      </List>
+            {countries.map((c) => {
+              const countryInfo = {
+                img: c.flags.png,
+                name: c.name,
+                info: [
+                  {
+                    title: 'Population',
+                    description: c.population.toLocaleString(),
+                  },
+                  {
+                    title: 'Region',
+                    description: c.region,
+                  },
+                  {
+                    title: 'Capital',
+                    description: c.capital,
+                  },
+                ],
+              };
+
+              return (
+                <Card
+                  key={c.name}
+                  onClick={() => navigate(`/country/${c.name}`)}
+                  {...countryInfo}
+                />
+              );
+            })}
+          </List>
     </>
   );
 };
-
-export default Home;

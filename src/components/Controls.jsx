@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
-import { CustomSelect } from "./CustomSelect";
-import styled from "styled-components";
-import Search from "./Search";
-const options = [
-  { value: "Europe", label: "Europe" },
-  { value: "Asia", label: "Asia" },
-  { value: "Oceania", label: "Oceania" },
-  { value: "Africa", label: "Africa" },
-  { value: "America", label: "America" },
-];
+import styled from 'styled-components';
+
+import { Search } from './Search';
+import { CustomSelect } from './CustomSelect';
+
+const optionsMap = {
+  'Africa': { value: 'Africa', label: 'Africa' },
+  'America': { value: 'America', label: 'America' },
+  'Asia': { value: 'Asia', label: 'Asia' },
+  'Europe': { value: 'Europe', label: 'Europe' },
+  'Oceania': { value: 'Oceania', label: 'Oceania' },
+}
+const options = Object.values(optionsMap);
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,22 +24,18 @@ const Wrapper = styled.div`
   }
 `;
 
-const Controls = () => {
-  const [search, setSearch] = useState("");
-  const [region, setRegion] = useState("");
+export const Controls = () => {
   return (
     <Wrapper>
-      <Search search={search} setSearch={setSearch} />
+      <Search />
       <CustomSelect
         options={options}
-        placeholder="Select Region"
+        placeholder="Filter by Region"
         isClearable
         isSearchable={false}
-        value={region}
-        onChange={setRegion}
+        value={''}
+        onChange={() => {}}
       />
     </Wrapper>
   );
 };
-
-export default Controls;
