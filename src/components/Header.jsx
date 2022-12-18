@@ -1,9 +1,12 @@
-import styled from 'styled-components';
-import useTheme from '../hooks/useTheme';
-import { Link } from 'react-router-dom';
-import { IoMoon, IoMoonOutline } from 'react-icons/io5';
+import styled from "styled-components";
+import useTheme from "../hooks/useTheme";
+import { Link } from "react-router-dom";
+import { IoMoon, IoMoonOutline } from "react-icons/io5";
+import { useSelector, useDispatch } from "react-redux";
 
-import { Container } from './Container';
+import { Container } from "./Container";
+import { setTheme } from "../store/theme/theme-actions";
+import { useEffect } from "react";
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -18,7 +21,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled(Link).attrs({
-  to: '/',
+  to: "/",
 })`
   color: var(--colors-text);
   font-size: var(--fs-sm);
@@ -30,12 +33,28 @@ const ModeSwitcher = styled.div`
   color: var(--colors-text);
   font-size: var(--fs-sm);
   cursor: pointer;
-  // font-weight: var(--fw-bold);
   text-transform: capitalize;
 `;
 
+const ModeTheme = styled.span`
+  margin-left: 0.75rem;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+`;
+
 export const Header = () => {
-  const { theme, toggleTheme } = useTheme();
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme);
+
+  const toggleTheme = () =>
+    dispatch(setTheme(theme === "light" ? "dark" : "light"));
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+  }, [theme]);
 
   return (
     <HeaderEl>
@@ -43,12 +62,12 @@ export const Header = () => {
         <Wrapper>
           <Title>Where is the world?</Title>
           <ModeSwitcher onClick={toggleTheme}>
-            {theme === 'light' ? (
+            {theme === "light" ? (
               <IoMoonOutline size="14px" />
             ) : (
               <IoMoon size="14px" />
-            )}{' '}
-            <span style={{ marginLeft: '0.75rem' }}>{theme} Theme</span>
+            )}
+            <ModeTheme>{theme} Theme</ModeTheme>
           </ModeSwitcher>
         </Wrapper>
       </Container>
